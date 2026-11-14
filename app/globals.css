@@ -1,3 +1,4 @@
+
 :root {
   color-scheme: dark;
   --ink: #0b0610; --panel: #120a19; --plum: #3b1a4a; --blood: #b0123a;
@@ -16,3 +17,37 @@ body {
 }
 h1, h2, h3 { font-family: var(--display), Georgia, serif; font-weight: 400; }
 a { color: var(--link); }
+
+.mw {
+  max-width: 720px;
+  margin: 3rem auto;
+  background: var(--panel);
+  border: 2px solid var(--hi);
+  box-shadow: 6px 6px 0 #000;
+}
+.mw-bar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .3rem .6rem;
+  background: repeating-linear-gradient(0deg, var(--plum) 0 2px, var(--panel) 2px 4px);
+  border-bottom: 2px solid var(--hi);
+  font-family: var(--ui), monospace;
+  font-size: .95rem;
+}
+.mw-bar button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: var(--ink);
+  border: 2px solid var(--bone);
+  color: var(--bone);
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .mw-bar button:hover { background: var(--bone); }
+}
+.mw-body { padding: 1.25rem 1.5rem; }
+

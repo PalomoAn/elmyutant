@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {SITE} from "@/lib/config";
 
 export default function Home() {
