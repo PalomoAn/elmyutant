@@ -63,3 +63,27 @@ a { color: var(--link); }
   .mw-bar button:hover { background: var(--bone); color: var(--ink); }
 }
 .mw-body { padding: 1.1rem 1.2rem 1.3rem; }
+
+/* ---------- menu bar ---------- */
+.menubar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 .9rem;
+  background: var(--panel);
+  border-bottom: 2px solid var(--bone);
+  font: 600 1.1rem var(--ui), monospace;
+}
+.menubar nav {
+  display: flex;
+  gap: 1rem;
+}
+.menubar a {
+  padding: .2rem .6rem;
+  color: var(--bone);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .menubar a:hover { background: var(--bone); color: var(--ink); }
+}
