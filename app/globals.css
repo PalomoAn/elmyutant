@@ -87,3 +87,25 @@ a { color: var(--link); }
 @media (hover: hover) {
   .menubar a:hover { background: var(--bone); color: var(--ink); }
 }
+/* ---------- desktop icons ---------- */
+.icons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 96px);
+  gap: 1rem .5rem;
+  padding: 1.5rem;
+}
+.icon {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: .35rem;
+  padding: .3rem 0;
+  color: var(--bone);
+  text-decoration: none;
+  text-align: center;
+}
+.icon svg { width: 75px; height: 75px; }
+.icon-label { font: 600 .98rem/1.1 var(--ui), monospace; }
+@media (hover: hover) {
+  .icon:hover .icon-label { background: var(--blood); color: var(--ink); }
+}
