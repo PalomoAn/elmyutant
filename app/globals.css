@@ -116,7 +116,7 @@ a { color: var(--link); }
 }
 
 .post-date { color: var(--muted); margin-top: -.5rem; }
-.post-body { white-space: pre-wrap; }
+
 
 .form { display: grid; gap: 1rem; max-width: 22rem; }
 .form label { display: grid; gap: .3rem; font-family: var(--ui), monospace; }
@@ -141,3 +141,14 @@ a { color: var(--link); }
 
 .form textarea { resize: vertical; }
 .form .check { display: flex; align-items: center; gap: .5rem; }
+
+.post-body h2 { margin: 1.4rem 0 .5rem; }
+.post-body ul, .post-body ol { padding-left: 1.4rem; }
+.post-body a { color: var(--link); }
+.post-body blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--hi);
+  color: var(--muted);
+}
+.post-body img { max-width: 100%; }

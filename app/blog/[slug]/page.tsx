@@ -2,6 +2,7 @@ import {notFound} from "next/navigation";
 import Link from "next/link";
 import Window from "@/components/Window";
 import {getPost} from "@/lib/posts";
+import ReactMarkdown from "react-markdown";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,9 @@ export default async function PostPage({params}:{params:Promise<{slug:string}>})
             <p className="post-date">
                 {new Date(post.created_at).toLocaleDateString()}
             </p>
-            <div className="post-body">{post.body}</div>
+            <div className="post-body">
+                 <ReactMarkdown>{post.body}</ReactMarkdown>
+            </div>
             <p><Link href="/blog">Back to Diary</Link></p>
         </Window>
     );
