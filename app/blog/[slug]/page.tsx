@@ -13,7 +13,7 @@ export default async function PostPage({params}:{params:Promise<{slug:string}>})
     if(!post) notFound();
 
     return(
-        <Window title={post.title}>
+        <Window title={post.title} closeHref="/blog">
             <h1>{post.title}</h1>
             <p className="post-date">
                 {new Date(post.created_at).toLocaleDateString()}
