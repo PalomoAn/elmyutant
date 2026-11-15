@@ -20,3 +20,15 @@ export async function getPosts(): Promise<Post[]> {
   if (error) throw new Error(error.message);
   return data ?? [];
 }
+
+export async function getPost(slug: string): Promise<Post | null>{
+    const {data, error} = await supabase
+    .from("posts")
+    .select("*")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+
+    if (error) throw new Error(error.message);
+  return data;
+}

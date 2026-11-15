@@ -15,7 +15,7 @@ export default function Window({title, children}: Props) {
         <div className="mw-bar">
             <button
             aria-label="Close"
-            onClick={() => router.push("/")}
+            onClick={() => router.back()}
             >
                 x
             </button>

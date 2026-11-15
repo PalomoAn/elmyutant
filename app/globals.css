@@ -115,3 +115,5 @@ a { color: var(--link); }
   .icon:hover .icon-label { background: var(--blood); color: var(--ink); }
 }
 
+.post-date { color: var(--muted); margin-top: -.5rem; }
+.post-body { white-space: pre-wrap; }
