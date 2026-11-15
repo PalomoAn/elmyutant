@@ -174,3 +174,25 @@ a { color: var(--link); }
 @media (hover: hover) {
   .logout button:hover { background: var(--bone); color: var(--ink); }
 }
+
+.gallery {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+.tile { display: grid; gap: .4rem; color: var(--bone); text-decoration: none; }
+.tile img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 2px solid var(--bone);
+  background: var(--ink);
+}
+.tile-title { font: 600 .95rem/1.1 var(--ui), monospace; }
+@media (hover: hover) {
+  .tile:hover img { border-color: var(--rose); }
+  .tile:hover .tile-title { background: var(--bone); color: var(--ink); }
+}
