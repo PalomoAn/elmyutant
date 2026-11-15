@@ -14,3 +14,9 @@ export async function login(formData: FormData) {
   if (error) redirect("/admin?error=1");
   redirect("/admin/posts");
 }
+
+export async function logout(){
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/admin");
+}

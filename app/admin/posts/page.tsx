@@ -3,6 +3,7 @@ import Window from "@/components/Window";
 import { createClient } from "@/lib/supabase-server";
 import { createPost } from "./actions";
 import Link from "next/link";
+import { logout } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,11 @@ export default async function AdminPosts() {
 
   return (
     <Window title="Write">
+
+        <form action={logout} className="logout">
+          <button type="submit">Log out</button>
+        </form>
+        
       <form action={createPost} className="form">
         <label>Title <input name="title" required /></label>
         <label>Slug (optional) <input name="slug" /></label>

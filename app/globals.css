@@ -157,3 +157,20 @@ a { color: var(--link); }
 @media (hover: hover) {
   .form .danger:hover { background: var(--blood); color: var(--bone); }
 }
+
+.logout {
+  margin: 0 0 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+.logout button {
+  padding: .3rem .8rem;
+  background: var(--panel);
+  border: 2px solid var(--bone);
+  color: var(--bone);
+  font: 600 .95rem var(--ui), monospace;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .logout button:hover { background: var(--bone); color: var(--ink); }
+}
