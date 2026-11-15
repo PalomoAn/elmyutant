@@ -152,3 +152,8 @@ a { color: var(--link); }
   color: var(--muted);
 }
 .post-body img { max-width: 100%; }
+
+.form .danger { border-color: var(--blood); color: var(--rose); }
+@media (hover: hover) {
+  .form .danger:hover { background: var(--blood); color: var(--bone); }
+}

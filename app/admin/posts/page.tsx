@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Window from "@/components/Window";
 import { createClient } from "@/lib/supabase-server";
 import { createPost } from "./actions";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -32,7 +33,8 @@ export default async function AdminPosts() {
       <ul className="post-list">
         {(posts ?? []).map((post) => (
           <li key={post.id}>
-            {post.title} {!post.published && <em>(draft)</em>}
+            <Link href={`/admin/posts/${post.id}`}>{post.title}</Link>{" "}
+             {!post.published && <em>(draft)</em>}
           </li>
         ))}
       </ul>
