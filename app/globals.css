@@ -117,3 +117,24 @@ a { color: var(--link); }
 
 .post-date { color: var(--muted); margin-top: -.5rem; }
 .post-body { white-space: pre-wrap; }
+
+.form { display: grid; gap: 1rem; max-width: 22rem; }
+.form label { display: grid; gap: .3rem; font-family: var(--ui), monospace; }
+.form input, .form textarea {
+  padding: .5rem .6rem;
+  background: var(--ink);
+  border: 2px solid var(--bone);
+  color: var(--bone);
+  font: inherit;
+}
+.form button {
+  padding: .5rem;
+  background: var(--panel);
+  border: 2px solid var(--bone);
+  color: var(--bone);
+  font: 600 1rem var(--ui), monospace;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .form button:hover { background: var(--bone); color: var(--ink); }
+}
