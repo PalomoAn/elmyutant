@@ -25,3 +25,31 @@ export async function getIllustrations(): Promise<Illustration[]> {
   if (error) throw new Error(error.message);
   return data ?? [];
 }
+
+export async function getIllustration(id: string): Promise<Illustration | null> {
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function getNeighbors(id: string) {
+  const { data, error } = await supabase
+    .from(TABLE)
+    .select("id")
+    .order("created_at", { ascending: false });
+
+  if (error) throw new Error(error.message);
+
+  const ids = (data ?? []).map((row) => row.id);
+  const i = ids.findIndex((x) => x === id);
+
+  return {
+    prev: i > 0 ? ids[i - 1] : null,
+    next: i !== -1 && i < ids.length - 1 ? ids[i + 1] : null,
+  };
+}
