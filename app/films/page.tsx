@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Window from "@/components/Window";
 import { getFilms, stars } from "@/lib/letterboxd";
+import { SITE } from "@/lib/config";
 
 const WIDTHS = [46, 52, 44, 50, 48, 54, 45, 51];
 
@@ -17,6 +18,19 @@ export default async function FilmsPage() {
 
   return (
     <Window title="Video Store">
+
+      <p className="shelf-note">
+        My latest films, from Letterboxd.{" "}
+        <a
+          href={`https://letterboxd.com/${SITE.letterboxd}/films/`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See all on Letterboxd →
+        </a>
+      </p>
+     
+
       <div className="shelf">
         {films.map((film) => (
           <div
