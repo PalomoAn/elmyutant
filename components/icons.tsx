@@ -44,3 +44,30 @@ export function WorkIcon() {
     </svg>
   );
 }
+
+export function CandleIcon() {
+  return (
+    <svg className="candle" viewBox="0 0 16 28" aria-hidden="true">
+      <g className="flame">
+        <path d="M8 1C11 6 12 8 12 10A4 4 0 0 1 4 10C4 8 5 6 8 1Z" fill="#ffc83d" />
+        <path d="M8 5C9.5 8 10 9 10 10.5A2 2 0 0 1 6 10.5C6 9 6.5 8 8 5Z" fill="#ff5d8f" />
+      </g>
+      <rect x="7.4" y="14" width="1.2" height="3" fill="#eadfcb" />
+      <rect x="4" y="17" width="8" height="10" fill="#eadfcb" />
+      <rect x="4" y="17" width="2" height="10" fill="#b9ae9a" />
+      <rect x="3" y="26" width="10" height="2" fill="#6a4680" />
+    </svg>
+  );
+}
+
+export function WelcomeIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M3 3h21l5 5v21H3z" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <rect x="8" y="3" width="14" height="9" fill="#0b0610" />
+      <rect x="17" y="5" width="3" height="5" fill="#eadfcb" />
+      <rect x="7" y="17" width="18" height="12" fill="#f7f1e6" stroke="#0b0610" strokeWidth="2" />
+      <path d="M10 21h12M10 25h8" stroke="#b0123a" strokeWidth="2" />
+    </svg>
+  );
+}
