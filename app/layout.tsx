@@ -3,7 +3,7 @@ import { Pirata_One, IM_Fell_English, Pixelify_Sans } from "next/font/google";
 import { SITE } from "@/lib/config";
 import MenuBar from "@/components/MenuBar";
 import "./globals.css";
-
+import { FX_SCRIPT } from "@/lib/fx";
 
 const display = Pirata_One({ subsets: ["latin"], weight: "400", variable: "--display" });
 const body = IM_Fell_English({ subsets: ["latin"], weight: "400", variable: "--body" });
@@ -16,7 +16,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${ui.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${display.variable} ${body.variable} ${ui.variable}`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: FX_SCRIPT }} />
+      </head>
       <body>
         <MenuBar />
         {children}

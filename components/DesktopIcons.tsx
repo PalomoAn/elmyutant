@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon} from "@/components/icons";
+import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon, SettingsIcon} from "@/components/icons";
 
 const ICONS = [
   { href: "/blog", label: "Diary", Icon: BlogIcon },
   { href: "/art", label: "Drawings", Icon: ArtIcon },
   { href: "/films", label: "Video Store", Icon: FilmsIcon },
   { href: "/work", label: "Projects", Icon: WorkIcon },
+  { href: "/settings", label: "Settings", Icon: SettingsIcon},
 
 ];
 

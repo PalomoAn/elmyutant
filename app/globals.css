@@ -9,6 +9,11 @@
   --muted: #a79bb5;
   --hi: #6a4680;
   --link: #c9a6ff;
+    --g: 1;
+  --glow-bone: 0 0 8px rgba(234, 223, 203, calc(.30 * var(--g))),
+    0 0 20px rgba(234, 223, 203, calc(.12 * var(--g)));
+  --glow-rose: 0 0 7px rgba(255, 93, 143, calc(.65 * var(--g))),
+    0 0 18px rgba(255, 93, 143, calc(.30 * var(--g)));
 }
 
 * {
@@ -704,3 +709,60 @@ a {
   70% { transform: scale(1.04, .95) skewX(-2deg); }
   100% { transform: scale(.96, 1.05) skewX(1deg); }
 }
+
+/* ---------- screen effects ---------- */
+::selection { background: var(--blood); color: var(--bone); }
+:focus-visible { outline: 3px dashed var(--rose); outline-offset: 2px; }
+@media (hover: hover) {
+  a:hover { color: var(--rose); }
+}
+
+.mw-title, .menubar, h2, h3, .ini b, .logotype { text-shadow: var(--glow-bone); }
+.ini b { text-shadow: var(--glow-rose); }
+
+body::before, body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+body::before {
+  z-index: 9998;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .55) 100%);
+}
+body::after {
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, .12) 0,
+    rgba(0, 0, 0, .12) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+html[data-scan="off"] body::before,
+html[data-scan="off"] body::after { display: none; }
+html[data-glow="off"] { --g: 0; }
+html[data-motion="off"] *,
+html[data-motion="off"] *::before,
+html[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-motion="off"] .dup { display: none; }
+@media (prefers-reduced-motion: reduce) { .dup { display: none; } }
+
+.opt { display: flex; align-items: center; gap: .7rem; padding: .4rem 0; cursor: pointer; font-size: 1.1rem; line-height: 1.3; }
+.opt input {
+  appearance: none;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  border: 2px solid var(--bone);
+}
+.opt input:checked::after { content: "✓"; color: var(--rose); font: 600 1.3rem/1 var(--ui), monospace; }

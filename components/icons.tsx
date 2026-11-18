@@ -71,3 +71,15 @@ export function WelcomeIcon() {
     </svg>
   );
 }
+
+export function SettingsIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="3" y="4" width="26" height="24" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <path d="M8 10h16M8 16h16M8 22h16" stroke="#0b0610" strokeWidth="2" />
+      <rect x="11" y="7" width="4" height="6" fill="#b0123a" stroke="#0b0610" strokeWidth="2" />
+      <rect x="18" y="13" width="4" height="6" fill="#b0123a" stroke="#0b0610" strokeWidth="2" />
+      <rect x="10" y="19" width="4" height="6" fill="#b0123a" stroke="#0b0610" strokeWidth="2" />
+    </svg>
+  );
+}

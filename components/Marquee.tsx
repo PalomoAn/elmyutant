@@ -10,7 +10,7 @@ export default function Marquee({ items }: { items: string[] }) {
     <div className="marquee" aria-hidden="true">
       <div className="track">
         <span>{content}</span>
-        <span>{content}</span>
+        <span className="dup">{content}</span>
       </div>
     </div>
   );
