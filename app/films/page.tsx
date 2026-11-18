@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Window from "@/components/Window";
-import { getFilms, stars } from "@/lib/letterboxd";
+import { getFilms, stars, type Film } from "@/lib/letterboxd";
 import { SITE } from "@/lib/config";
 import Tape from "@/components/Tape";
+import Link from "next/link";
 
 const WIDTHS = [46, 52, 44, 50, 48, 54, 45, 51];
 
@@ -13,9 +14,25 @@ function tone(rating: number | null) {
   return "#3a3144";
 }
 
-export default async function FilmsPage() {
-  const films = await getFilms();
+type SortKey = "recent" | "rating" | "year";
+const SORT_KEYS: SortKey[] = ["recent", "rating", "year"];
 
+const SORTERS: Record<SortKey, (a: Film, b: Film) => number> = {
+  recent: () => 0, // the feed already comes newest first
+  rating: (a, b) => (b.rating ?? -1) - (a.rating ?? -1),
+  year: (a, b) => b.year - a.year,
+};
+
+export default async function FilmsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sort?: string }>;
+}) {
+  const { sort } = await searchParams;
+  const mode: SortKey = SORT_KEYS.includes(sort as SortKey) ? (sort as SortKey) : "recent";
+
+  const films = await getFilms();
+  const sorted = [...films].sort(SORTERS[mode]);
   return (
     <Window title="Video Store">
 
@@ -29,9 +46,19 @@ export default async function FilmsPage() {
           See all on Letterboxd →
         </a>
       </p>
-
+<nav className="chips">
+  {SORT_KEYS.map((key) => (
+    <Link
+      key={key}
+      href={`/films?sort=${key}`} 
+      className={key === mode ? "chip on" : "chip"}
+    >
+      {key}
+    </Link>
+  ))}
+</nav>
       <div className="shelf">
-        {films.map((film) => (
+        {sorted.map((film) => (
           <Tape
             key={film.id}
             href={`/films/${film.id}`}
