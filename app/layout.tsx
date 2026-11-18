@@ -12,6 +12,7 @@ const ui = Pixelify_Sans({ subsets: ["latin"], variable: "--ui" });
 export const metadata: Metadata = {
   title: { default: SITE.name, template: `%s · ${SITE.name}` },
   description: SITE.tagline,
+  metadataBase: new URL("https://elmyutant.vercel.app"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
