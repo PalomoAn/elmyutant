@@ -3,6 +3,7 @@ import Link from "next/link";
 import Window from "@/components/Window";
 import { createClient } from "@/lib/supabase-server";
 import { uploadIllustration } from "./actions";
+import { deleteIllustration } from "./actions";
 
 export const dynamic = "force-dynamic";
 
@@ -30,7 +31,13 @@ export default async function AdminArt() {
       <h2>All illustrations</h2>
       <ul className="post-list">
         {(items ?? []).map((item) => (
-          <li key={item.id}>{item.title}</li>
+          <li key={item.id}>
+            {item.title}
+            <form action={deleteIllustration} className="inline-form">
+              <input type="hidden" name="id" value={item.id} />
+              <button type="submit">Delete</button>
+            </form>
+          </li>
         ))}
       </ul>
 

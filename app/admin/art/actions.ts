@@ -4,9 +4,10 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase-server";
 import sharp from "sharp";
+import { imageUrl } from "@/lib/illustrations";
 
-const MAX_EDGE = 2000;   
-const QUALITY = 82;  
+const MAX_EDGE = 2000;
+const QUALITY = 82;
 
 const BUCKET = "illustrations";
 const TABLE = "illustrations";
@@ -30,21 +31,21 @@ export async function uploadIllustration(formData: FormData) {
   if (!file.type.startsWith("image/")) throw new Error("That file is not an image.");
   if (file.size > MAX_BYTES) throw new Error("Image is over 10 MB.");
 
- const input = Buffer.from(await file.arrayBuffer());
+  const input = Buffer.from(await file.arrayBuffer());
 
-const output = await sharp(input)
-  .rotate()
-  .resize({ width: MAX_EDGE, height: MAX_EDGE, fit: "inside", withoutEnlargement: true })
-  .webp({ quality: QUALITY })
-  .toBuffer();
+  const output = await sharp(input)
+    .rotate()
+    .resize({ width: MAX_EDGE, height: MAX_EDGE, fit: "inside", withoutEnlargement: true })
+    .webp({ quality: QUALITY })
+    .toBuffer();
   console.log(`original ${(file.size / 1024).toFixed(0)} KB -> webp ${(output.length / 1024).toFixed(0)} KB`);
 
 
   const path = `${Date.now()}-${crypto.randomUUID().slice(0, 8)}.webp`;
 
   const { error: uploadError } = await supabase.storage
-  .from(BUCKET)
-  .upload(path, output, { contentType: "image/webp" });
+    .from(BUCKET)
+    .upload(path, output, { contentType: "image/webp" });
 
   const { error: insertError } = await supabase.from(TABLE).insert({
     title,
@@ -56,6 +57,34 @@ const output = await sharp(input)
   if (insertError) {
     await supabase.storage.from(BUCKET).remove([path]);
     throw new Error(insertError.message);
+  }
+
+  revalidatePath("/art");
+  redirect("/admin/art");
+}
+
+export async function deleteIllustration(formData: FormData) {
+  const supabase = await createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/admin");
+
+  const id = String(formData.get("id"));
+
+  // 1. find the file path before the row disappears
+  const { data: item } = await supabase
+    .from(TABLE)
+    .select("image_path")
+    .eq("id", id)
+    .maybeSingle();
+
+  // 2. delete the row
+  const { error } = await supabase.from(TABLE).delete().eq("id", id);
+  if (error) throw new Error(error.message);
+
+  // 3. delete the file
+  if (item) {
+    await supabase.storage.from(BUCKET).remove([item.image_path]);
   }
 
   revalidatePath("/art");
