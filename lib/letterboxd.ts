@@ -15,9 +15,9 @@ export type Film = {
 };
 
 export function stars(rating: number | null) {
-  if (rating === null) return "unrated";
-  const full = Math.floor(rating);
-  return "★".repeat(full) + (rating % 1 ? "½" : "");
+    if (rating === null) return "unrated";
+    const full = Math.floor(rating);
+    return "★".repeat(full) + (rating % 1 ? "½" : "");
 }
 
 function decode(text: string) {
