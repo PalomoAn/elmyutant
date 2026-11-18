@@ -425,18 +425,50 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 16px;
 }
-.film { margin: 0; }
+
+.film {
+  margin: 0;
+}
+
 .poster {
   position: relative;
   aspect-ratio: 2 / 3;
   border: 2px solid var(--hi);
   background: var(--panel);
 }
-.poster img { object-fit: cover; }
+
+.poster img {
+  object-fit: cover;
+}
+
 .film figcaption {
   font-family: var(--ui);
   font-size: 0.85rem;
   margin-top: 6px;
   color: var(--muted);
 }
-.film strong { color: var(--bone); }
+
+.film strong {
+  color: var(--bone);
+}
+
+.film-detail {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+}
+
+.film-detail .poster {
+  width: 200px;
+}
+
+.film-detail h2 {
+  font-family: var(--display);
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  .film-detail {
+    grid-template-columns: 1fr;
+  }
+}

@@ -14,6 +14,12 @@ export type Film = {
     review: string[]; // plain-text paragraphs; empty if there is no written review
 };
 
+export function stars(rating: number | null) {
+  if (rating === null) return "unrated";
+  const full = Math.floor(rating);
+  return "★".repeat(full) + (rating % 1 ? "½" : "");
+}
+
 function decode(text: string) {
     return text
         .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
