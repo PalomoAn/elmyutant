@@ -84,3 +84,14 @@ export function SettingsIcon() {
   );
 }
 
+export function TrashIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M8 9h16l-1.5 20h-13z" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <rect x="6" y="6" width="20" height="3" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <rect x="13" y="3" width="6" height="3" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <path d="M12 13v12M16 13v12M20 13v12" stroke="#0b0610" strokeWidth="2" />
+    </svg>
+  );
+}
+

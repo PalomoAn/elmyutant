@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon, SettingsIcon, WelcomeIcon} from "@/components/icons";
+import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon, SettingsIcon, WelcomeIcon, TrashIcon} from "@/components/icons";
 
 const ICONS = [
   { href: "/welcome", label: "Welcome", Icon: WelcomeIcon },
@@ -8,7 +8,7 @@ const ICONS = [
   { href: "/art", label: "Drawings", Icon: ArtIcon },
   { href: "/films", label: "Video Store", Icon: FilmsIcon },
   { href: "/settings", label: "Settings", Icon: SettingsIcon},
-  
+  { href: "/trash", label: "Trash", Icon: TrashIcon},
 
 ];
 

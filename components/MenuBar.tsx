@@ -16,6 +16,7 @@ export default function MenuBar() {
       >
         <Link role="menuitem" href="/welcome">About Jose</Link>
         <Link role="menuitem" href="/settings">Settings…</Link>
+        <Link role="menuitem" href="/shutdown">Shut Down…</Link>
       </Menu>
 
       <Menu label="Go">
@@ -27,7 +28,7 @@ export default function MenuBar() {
       </Menu>
 
       <Menu label="Connect">
-        <a role="menuitem" href="mailto:andrespalomor@gmail.com">Email</a>
+        <a role="menuitem" href="mailto:andrespalomor@gmail.cm">Email</a>
         <a
           role="menuitem"
           href="https://github.com/PalomoAn"
@@ -43,6 +44,15 @@ export default function MenuBar() {
           rel="noopener noreferrer"
         >
           Letterboxd
+        </a>
+
+        <a
+          role="menuitem"
+          href={SITE.discord}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Discord
         </a>
       </Menu>
 
