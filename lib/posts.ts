@@ -1,8 +1,7 @@
 import {supabase} from "@/lib/supabase";
-import { error } from "console";
 
 export type Post = {
-  id: number;
+  id: string;
   slug: string;
   title: string;
   body: string;
