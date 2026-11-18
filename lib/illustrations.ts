@@ -16,12 +16,23 @@ export function imageUrl(path: string) {
   return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
-export async function getIllustrations(): Promise<Illustration[]> {
-  const { data, error } = await supabase
+export async function getAllTags(): Promise<string[]> {
+  const { data, error } = await supabase.from(TABLE).select("tags");
+  if (error) throw new Error(error.message);
+
+  const all = (data ?? []).flatMap((row) => row.tags ?? []);
+  return Array.from(new Set(all)).sort();
+}
+
+export async function getIllustrations(tag?: string): Promise<Illustration[]> {
+  let query = supabase
     .from(TABLE)
     .select("*")
     .order("created_at", { ascending: false });
 
+  if (tag) query = query.contains("tags", [tag]);
+
+  const { data, error } = await query;
   if (error) throw new Error(error.message);
   return data ?? [];
 }

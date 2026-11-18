@@ -43,5 +43,7 @@ export default async function AdminArt() {
 
       <p><Link href="/admin/posts">← Back to posts</Link></p>
     </Window>
+    
   );
+  
 }

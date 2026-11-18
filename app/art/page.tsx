@@ -1,16 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
 import Window from "@/components/Window";
-import { getIllustrations, imageUrl } from "@/lib/illustrations";
+import { getAllTags, getIllustrations, imageUrl } from "@/lib/illustrations";
 
 export const dynamic = "force-dynamic";
 
-export default async function ArtPage() {
-  const items = await getIllustrations();
+export default async function ArtPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
+  const { tag } = await searchParams;
+  const [items, tags] = await Promise.all([getIllustrations(tag), getAllTags()]);
 
   return (
     <Window title="Drawings">
-      {items.length === 0 && <p>No drawings yet.</p>}
+      <nav className="chips">
+        <Link href="/art" className={!tag ? "chip on" : "chip"}>all</Link>
+        {tags.map((t) => (
+          <Link
+            key={t}
+            href={`/art?tag=${encodeURIComponent(t)}`}
+            className={t === tag ? "chip on" : "chip"}
+          >
+            {t}
+          </Link>
+        ))}
+      </nav>
+
+      {items.length === 0 && <p>No drawings here yet.</p>}
+
       <ul className="gallery">
         {items.map((item) => (
           <li key={item.id}>

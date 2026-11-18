@@ -20,14 +20,15 @@ export default async function ArtViewer({
 
   return (
     <Window title={item.title} closeHref="/art">
-      <Image
-        className="viewer-img"
-        src={imageUrl(item.image_path)}
-        alt={item.title}
-        width={1200}
-        height={1200}
-        sizes="(max-width: 760px) 100vw, 720px"
-      />
+      <div className="viewer-frame">
+        <Image
+          className="viewer-img"
+          src={imageUrl(item.image_path)}
+          alt={item.title}
+          fill
+          sizes="(max-width: 760px) 100vw, 720px"
+        />
+      </div>
 
       <nav className="viewer-nav">
         {prev ? (
@@ -52,7 +53,13 @@ export default async function ArtViewer({
       {item.tags.length > 0 && (
         <p className="tags">
           {item.tags.map((tag) => (
-            <span key={tag} className="tag">{tag}</span>
+            <Link
+              key={tag}
+              href={`/art?tag=${encodeURIComponent(tag)}`}
+              className="chip"
+            >
+              {tag}
+            </Link>
           ))}
         </p>
       )}
