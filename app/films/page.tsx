@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
 import Window from "@/components/Window";
 import { getFilms, stars } from "@/lib/letterboxd";
 import { SITE } from "@/lib/config";
+import Tape from "@/components/Tape";
 
 const WIDTHS = [46, 52, 44, 50, 48, 54, 45, 51];
 
@@ -29,36 +29,28 @@ export default async function FilmsPage() {
           See all on Letterboxd →
         </a>
       </p>
-     
 
       <div className="shelf">
         {films.map((film) => (
-          <div
+          <Tape
             key={film.id}
-            className="tape3d"
-            style={
-              { "--w": `${WIDTHS[film.title.length % WIDTHS.length]}px` } as React.CSSProperties
+            href={`/films/${film.id}`}
+            label={`${film.title}, ${film.year}, ${stars(film.rating)}`}
+            width={WIDTHS[film.title.length % WIDTHS.length]}
+            side={
+              film.poster ? (
+                <Image src={film.poster} alt="" fill sizes="130px" />
+              ) : null
             }
           >
-            <Link
-              href={`/films/${film.id}`}
-              className="t-front"
-              aria-label={`${film.title}, ${film.year}, ${stars(film.rating)}`}
-            >
-              <span className="stripe" style={{ background: tone(film.rating) }}>
-                {film.rating ?? "–"}
-              </span>
-              <span className="stitle">
-                <span>{film.title}</span>
-              </span>
-              <span className="syear">{film.year}</span>
-            </Link>
-            <span className="t-side">
-              {film.poster && (
-                <Image src={film.poster} alt="" fill sizes="130px" />
-              )}
+            <span className="stripe" style={{ background: tone(film.rating) }}>
+              {film.rating ?? "–"}
             </span>
-          </div>
+            <span className="stitle">
+              <span>{film.title}</span>
+            </span>
+            <span className="syear">{film.year}</span>
+          </Tape>
         ))}
       </div>
     </Window>

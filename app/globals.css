@@ -287,25 +287,22 @@ a {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
+  columns: 3 150px;
+  column-gap: 1rem;
 }
 
-.tile {
-  display: grid;
-  gap: .4rem;
-  color: var(--bone);
-  text-decoration: none;
+.gallery li {
+  break-inside: avoid;
+  margin: 0 0 1rem;
 }
 
 .tile img {
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
+  height: auto;
   border: 2px solid var(--bone);
   background: var(--ink);
 }
+
 
 .tile-title {
   font: 600 .95rem/1.1 var(--ui), monospace;
@@ -585,4 +582,21 @@ a {
   margin: 0 0 .8rem;
   color: var(--muted);
   font-family: var(--ui), monospace;
+}
+
+.tape3d.pulled {
+  transform: perspective(800px) translateY(-26px) rotateY(-14deg);
+  z-index: 3;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tape3d.pulled:focus-within {
+    transform: perspective(800px) translateY(-26px) rotateY(-14deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .tape3d.pulled:hover {
+    transform: perspective(800px) translateY(-26px) rotateY(-14deg);
+  }
 }

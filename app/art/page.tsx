@@ -37,9 +37,9 @@ export default async function ArtPage({
               <Image
                 src={imageUrl(item.image_path)}
                 alt={item.title}
-                width={240}
-                height={240}
-                sizes="(max-width: 600px) 45vw, 240px"
+                width={0}
+                height={0}
+                sizes="(max-width: 720px) 50vw, 240px"
               />
               <span className="tile-title">{item.title}</span>
             </Link>
