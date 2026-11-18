@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { BlogIcon, ArtIcon, FilmsIcon } from "@/components/icons";
+import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon} from "@/components/icons";
 
 const ICONS = [
   { href: "/blog", label: "Diary", Icon: BlogIcon },
   { href: "/art", label: "Drawings", Icon: ArtIcon },
   { href: "/films", label: "Video Store", Icon: FilmsIcon },
+  { href: "/work", label: "Projects", Icon: WorkIcon },
+
 ];
 
 export default function DesktopIcons() {

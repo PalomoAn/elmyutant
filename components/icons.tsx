@@ -30,3 +30,17 @@ export function FilmsIcon() {
     </svg>
   );
 }
+
+export function WorkIcon() {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <rect x="9" y="9" width="14" height="14" fill="#eadfcb" stroke="#0b0610" strokeWidth="2" />
+      <rect x="13" y="13" width="6" height="6" fill="#b0123a" />
+      <path
+        d="M12 3v6M16 3v6M20 3v6M12 23v6M16 23v6M20 23v6M3 12h6M3 16h6M3 20h6M23 12h6M23 16h6M23 20h6"
+        stroke="#eadfcb"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
