@@ -5,6 +5,7 @@ A personal website built as an "operating system in the browser": a goth, retro-
 **Live:** https://elmyutant.vercel.app
 
 ![Screenshot](docs/screenshoot1.png)
+![![Video Store: the VHS shelf]](docs/screenshoot2.png)
 
 ## Features
 - **Drawings**: gallery with tag filters and an image viewer. Uploads from a private admin are resized to WebP with `sharp` and stored in Supabase Storage.
