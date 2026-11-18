@@ -9,16 +9,27 @@ export default async function Blog() {
 
   return (
     <Window title="Diary">
+      {posts.length === 0 && <p>No posts yet.</p>}
 
-      <h1>Blog Page</h1>
-      {posts.length === 0 && <p> no posts yet</p>}
-      <ul className="post-list">
-        {posts.map(post => (
-          <li key={post.id}>
-            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {posts.length > 0 && (
+        <div className="explorer">
+          <div className="cols">
+            <span>Name</span>
+            <span className="s">Modified</span>
+          </div>
+          {posts.map((post) => (
+            <Link key={post.id} href={`/blog/${post.slug}`} className="row">
+              <span>{post.slug}.txt</span>
+              <span className="s">
+                {new Date(post.created_at).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </Link>
+          ))}
+        </div>
+      )}
     </Window>
   );
 }

@@ -766,3 +766,31 @@ html[data-motion="off"] .dup { display: none; }
   border: 2px solid var(--bone);
 }
 .opt input:checked::after { content: "✓"; color: var(--rose); font: 600 1.3rem/1 var(--ui), monospace; }
+
+.explorer { border: 2px solid var(--bone); }
+.explorer .cols,
+.explorer .row {
+  display: grid;
+  grid-template-columns: 1fr 6rem;
+  gap: 1rem;
+  padding: .3rem .8rem;
+  font: 600 1.1rem/1.4 var(--ui), monospace;
+  width: 100%;
+  text-align: left;
+}
+.explorer .cols {
+  border-bottom: 2px solid var(--bone);
+  color: var(--muted);
+  font-weight: 400;
+}
+.explorer .row {
+  border-bottom: 1px dotted var(--hi);
+  color: var(--bone);
+  text-decoration: none;
+}
+.explorer .row:last-child { border-bottom: 0; }
+.explorer .row:focus-visible { background: var(--bone); color: var(--ink); }
+@media (hover: hover) {
+  .explorer .row:hover { background: var(--bone); color: var(--ink); }
+}
+.explorer .s { text-align: right; }
