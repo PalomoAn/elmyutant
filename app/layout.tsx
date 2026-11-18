@@ -4,6 +4,7 @@ import { SITE } from "@/lib/config";
 import MenuBar from "@/components/MenuBar";
 import "./globals.css";
 import { FX_SCRIPT } from "@/lib/fx";
+import DesktopIcons from "@/components/DesktopIcons"
 
 const display = Pirata_One({ subsets: ["latin"], weight: "400", variable: "--display" });
 const body = IM_Fell_English({ subsets: ["latin"], weight: "400", variable: "--body" });
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <MenuBar />
+        <DesktopIcons />
         {children}
       </body>
     </html>
