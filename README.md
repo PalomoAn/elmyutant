@@ -33,3 +33,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ## Notes
 - The Letterboxd feed holds only the ~50 latest entries, so the shelf is a "recently watched" view that links to the full list.
 - The site is built step by step as a Next.js learning project. See `NOTES.md` for what I learned at each stage.
+
+## License
+Code is released under the [MIT License](LICENSE).
+Illustrations, writing and the elMyutant name and logo are © Jose, all rights reserved.
