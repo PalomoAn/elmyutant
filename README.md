@@ -2,7 +2,7 @@
 
 A personal website built as an "operating system in the browser": a goth, retro-90s desktop with a menu bar, icons and windows. It holds my illustration gallery, a Letterboxd film shelf, a diary, and my freelance work.
 
-**Live:** https://elmyutant.vercel.app
+**Live:** https://www.elmyutant.dev/
 
 ![Screenshot](docs/screenshoot1.png)
 ![![Video Store: the VHS shelf]](docs/screenshoot2.png)

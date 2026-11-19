@@ -5,6 +5,7 @@ import MenuBar from "@/components/MenuBar";
 import "./globals.css";
 import { FX_SCRIPT } from "@/lib/fx";
 import DesktopIcons from "@/components/DesktopIcons"
+import { Analytics } from "@vercel/analytics/next";
 
 const display = Pirata_One({ subsets: ["latin"], weight: "400", variable: "--display" });
 const body = IM_Fell_English({ subsets: ["latin"], weight: "400", variable: "--body" });
@@ -13,7 +14,7 @@ const ui = Pixelify_Sans({ subsets: ["latin"], variable: "--ui" });
 export const metadata: Metadata = {
   title: { default: SITE.name, template: `%s · ${SITE.name}` },
   description: SITE.tagline,
-  metadataBase: new URL("https://elmyutant.vercel.app"),
+  metadataBase: new URL("https://www.elmyutant.dev/"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MenuBar />
         <DesktopIcons />
         {children}
+        <Analytics />
       </body>
     </html>
   );
