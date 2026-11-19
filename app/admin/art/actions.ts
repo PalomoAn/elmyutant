@@ -47,6 +47,8 @@ export async function uploadIllustration(formData: FormData) {
     .from(BUCKET)
     .upload(path, output, { contentType: "image/webp" });
 
+  if (uploadError) throw new Error(uploadError.message);
+
   const { error: insertError } = await supabase.from(TABLE).insert({
     title,
     description,
