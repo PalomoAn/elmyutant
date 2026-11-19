@@ -1132,3 +1132,15 @@ html[data-motion="off"] .dup {
     font-size: .95rem;
   }
 }
+
+@media (min-width: 760px) {
+  .mw-bar {
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+  }
+
+  .mw-bar:active {
+    cursor: grabbing;
+  }
+}
