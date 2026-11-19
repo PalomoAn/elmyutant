@@ -14,7 +14,7 @@ export default async function ArtPage({
   const [items, tags] = await Promise.all([getIllustrations(tag), getAllTags()]);
 
   return (
-    <Window title="Drawings">
+    <Window title="Drawings" width={740} x={70} y={34}>
       <nav className="chips">
         <Link href="/art" className={!tag ? "chip on" : "chip"}>all</Link>
         {tags.map((t) => (

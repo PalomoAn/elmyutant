@@ -17,7 +17,7 @@ export default async function FilmPage({
     if (!film) notFound();
 
     return (
-        <Window title={film.title} closeHref="/films">
+        <Window title={film.title} width={700} x={110} y={50} closeHref="/films">
             <div className="film-detail">
                 {film.poster && (
                     <div className="poster">

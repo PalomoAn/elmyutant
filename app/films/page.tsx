@@ -34,7 +34,7 @@ export default async function FilmsPage({
   const films = await getFilms();
   const sorted = [...films].sort(SORTERS[mode]);
   return (
-    <Window title="Video Store">
+    <Window title="Video Store" width={760} x={80} y={30}>
 
       <p className="shelf-note">
         My latest films, from Letterboxd.{" "}

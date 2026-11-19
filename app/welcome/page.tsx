@@ -8,7 +8,7 @@ const SKILLS = ["React", "Python", "Supabase", "Node.js", "Express", "ESP32", "S
 
 export default function WelcomePage() {
   return (
-    <Window title="Welcome">
+    <Window title="Welcome" id="welcome" width={560} x={60} y={30} closeHref="/desktop">
       <div className="welcome">
         <div className="logo">
           <CandleIcon />

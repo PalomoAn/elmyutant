@@ -3,7 +3,7 @@ import { TrashIcon } from "@/components/icons";
 
 export default function TrashPage() {
   return (
-    <Window title="Trash">
+    <Window title="Trash" width={340} x={130} y={90}>
       <div className="trash">
         <div className="trash-icon">
           <TrashIcon />

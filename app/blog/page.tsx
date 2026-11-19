@@ -8,7 +8,7 @@ export default async function Blog() {
   const posts = await getPosts();
 
   return (
-    <Window title="Diary">
+    <Window title="Diary" width={520} x={100} y={50}>
       {posts.length === 0 && <p>No posts yet.</p>}
 
       {posts.length > 0 && (

@@ -4,7 +4,7 @@ import { PROJECTS } from "@/lib/projects";
 
 export default function WorkPage() {
     return (
-        <Window title="My Projects">
+        <Window title="Work" width={760} x={90} y={40}>
             <p className="lede">
                 <span className="led" aria-hidden="true" />
                 Freelance developer. Full-stack, IoT and data. Available for new projects.
