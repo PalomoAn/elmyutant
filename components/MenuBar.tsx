@@ -28,7 +28,7 @@ export default function MenuBar() {
       </Menu>
 
       <Menu label="Connect">
-        <a role="menuitem" href="mailto:andrespalomor@gmail.cm">Email</a>
+        <a role="menuitem" href="mailto:andrespalomor@outlook.com">Email</a>
         <a
           role="menuitem"
           href="https://github.com/PalomoAn"

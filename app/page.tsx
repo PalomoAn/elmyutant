@@ -1,15 +1,14 @@
-import Link from "next/link";
+import Window from "@/components/Window";
+import WelcomeContent from "@/components/WelcomeContent";
 
-import {SITE} from "@/lib/config";
-import DesktopIcons from "@/components/DesktopIcons";
+export const metadata = {
+  title: { absolute: "elMyutant · Jose, freelance developer" },
+};
 
 export default function Home() {
   return (
-    <main>
-      <h1>{SITE.name}</h1>
-      <DesktopIcons />
-      <p>This is the homepage of my personal website built with Next.js.</p>
-      <Link href="/blog">Blog</Link>
-    </main>
+    <Window title="Welcome" closeHref="/desktop">
+      <WelcomeContent />
+    </Window>
   );
-} 
+}
