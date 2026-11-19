@@ -1,5 +1,6 @@
 import Window from "@/components/Window";
 import { login } from "./actions";
+export const metadata = { robots: { index: false, follow: false } };
 
 export default async function AdminLogin({
   searchParams,
