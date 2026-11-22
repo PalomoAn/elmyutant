@@ -4,10 +4,14 @@ A personal website built as an "operating system in the browser": a goth, retro-
 
 **Live:** https://www.elmyutant.dev/
 
-![Screenshot](docs/screenshoot1.png)
-![![Video Store: the VHS shelf]](docs/screenshoot2.png)
+![Several windows open at once: Video Store in front, Drawings and Welcome behind](docs/desktop-windows.png)
+
+| | |
+|---|---|
+| ![A drawing open over the Drawings gallery](docs/drawing-viewer.png) | ![A film review over the Video Store VHS shelf](docs/video-store.png) |
 
 ## Features
+- **Multiple windows**: open several windows at once, drag them around, and click one behind to bring it to the front. The URL holds the whole desktop (`/films?open=art,welcome`), so Back, refresh and shared links show the same windows. On phones only the front window shows.
 - **Drawings**: gallery with tag filters and an image viewer. Uploads from a private admin are resized to WebP with `sharp` and stored in Supabase Storage.
 - **Video Store**: my Letterboxd diary (public RSS feed) rendered as an angled VHS shelf, sortable by recent, rating or year, with a review window per film.
 - **Diary**: Markdown posts written from an in-site editor, no git needed.
@@ -33,6 +37,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ## Notes
 - The Letterboxd feed holds only the ~50 latest entries, so the shelf is a "recently watched" view that links to the full list.
 - The site is built step by step as a Next.js learning project. See `NOTES.md` for what I learned at each stage.
+- To add a new window to the desktop, see `ADDING-PAGES.md`.
 
 ## License
 Code is released under the [MIT License](LICENSE).
