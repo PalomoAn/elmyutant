@@ -1,14 +1,14 @@
-import Window from "@/components/Window";
-import WelcomeContent from "@/components/WelcomeContent";
+import WindowStack from "@/components/WindowStack";
+import { readDesk, type SearchParams } from "@/lib/windows";
 
 export const metadata = {
   title: { absolute: "elMyutant · Jose, freelance developer" },
 };
 
-export default function Home() {
-  return (
-    <Window title="Welcome" closeHref="/desktop">
-      <WelcomeContent />
-    </Window>
-  );
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  return <WindowStack desk={readDesk("/", await searchParams)} />;
 }

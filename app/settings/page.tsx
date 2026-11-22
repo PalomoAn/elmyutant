@@ -1,10 +1,10 @@
-import Window from "@/components/Window";
-import FxOptions from "@/components/FxOptions";
+import WindowStack from "@/components/WindowStack";
+import { readDesk, type SearchParams } from "@/lib/windows";
 
-export default function SettingsPage() {
-  return (
-    <Window title="Settings" width={430} x={120} y={70}>
-      <FxOptions />
-    </Window>
-  );
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  return <WindowStack desk={readDesk("/settings", await searchParams)} />;
 }

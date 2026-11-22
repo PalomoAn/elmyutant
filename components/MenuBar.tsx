@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DeskLink from "@/components/DeskLink";
 import Clock from "@/components/Clock";
 import Menu from "@/components/menu";
 import { CandleIcon } from "@/components/icons";
@@ -14,17 +15,17 @@ export default function MenuBar() {
           </>
         }
       >
-        <Link role="menuitem" href="/welcome">About Jose</Link>
-        <Link role="menuitem" href="/settings">Settings…</Link>
+        <DeskLink role="menuitem" href="/welcome">About Jose</DeskLink>
+        <DeskLink role="menuitem" href="/settings">Settings…</DeskLink>
         <Link role="menuitem" href="/shutdown">Shut Down…</Link>
       </Menu>
 
       <Menu label="Go">
-        <Link role="menuitem" href="/">Desktop</Link>
-        <Link role="menuitem" href="/work">My Projects</Link>
-        <Link role="menuitem" href="/art">My Drawings</Link>
-        <Link role="menuitem" href="/films">Video Store</Link>
-        <Link role="menuitem" href="/blog">Diary</Link>
+        <DeskLink role="menuitem" href="/">Desktop</DeskLink>
+        <DeskLink role="menuitem" href="/work">My Projects</DeskLink>
+        <DeskLink role="menuitem" href="/art">My Drawings</DeskLink>
+        <DeskLink role="menuitem" href="/films">Video Store</DeskLink>
+        <DeskLink role="menuitem" href="/blog">Diary</DeskLink>
       </Menu>
 
       <Menu label="Connect">

@@ -2,15 +2,17 @@ import Link from "next/link";
 import Marquee from "@/components/Marquee";
 import { CandleIcon } from "@/components/icons";
 import { SITE } from "@/lib/config";
+import { go, type Desk } from "@/lib/windows";
 
 const SKILLS = ["React", "Python", "Supabase", "Node.js", "Express", "ESP32", "SSE", "GraphQL", "Jupyter", "SHAP"];
 
-export default function WelcomeContent() {
+export default function WelcomeContent({ desk }: { desk: Desk }) {
   return (
     <div className="welcome">
       <div className="logo">
         <CandleIcon />
         <span className="logotype">{SITE.name}</span>
+        <CandleIcon />
       </div>
       <h1>{SITE.tagline}</h1>
       <p>
@@ -22,9 +24,9 @@ export default function WelcomeContent() {
         available for new projects
       </p>
       <div className="pills">
-        <Link className="pill" href="/work">View my work</Link>
+        <Link className="pill" href={go(desk, "/work")}>View my work</Link>
       </div>
       <Marquee items={SKILLS} />
     </div>
   );
-}   
+}

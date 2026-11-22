@@ -1,4 +1,4 @@
-import Link from "next/link";
+import DeskLink from "@/components/DeskLink";
 import { BlogIcon, ArtIcon, FilmsIcon, WorkIcon, SettingsIcon, WelcomeIcon, TrashIcon} from "@/components/icons";
 
 const ICONS = [
@@ -16,10 +16,10 @@ export default function DesktopIcons() {
   return (
     <nav className="icons">
       {ICONS.map(({ href, label, Icon }) => (
-        <Link key={href} href={href} className="icon">
+        <DeskLink key={href} href={href} className="icon">
           <Icon />
           <span className="icon-label">{label}</span>
-        </Link>
+        </DeskLink>
       ))}
     </nav>
   );

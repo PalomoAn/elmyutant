@@ -88,6 +88,33 @@ a {
   .mw {
     animation: pop .22s steps(5);
   }
+
+  /* windows behind were already open: no pop on every focus change */
+  .mw[data-behind],
+  .mw[data-still] {
+    animation: none;
+  }
+}
+
+/* ---------- windows behind the focused one (?open=) ---------- */
+.mw[data-behind] {
+  z-index: 9;
+  cursor: default;
+}
+
+.mw[data-behind] .mw-bar {
+  background: none;
+}
+
+.mw[data-behind] .mw-title {
+  color: var(--muted);
+}
+
+/* phone: windows are full width, so only the focused one shows */
+@media (max-width: 759px) {
+  .mw[data-behind] {
+    display: none;
+  }
 }
 
 @keyframes pop {

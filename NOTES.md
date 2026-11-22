@@ -113,7 +113,6 @@ My notes for the elMyutant project, by stage, with answers to the checkpoint que
 - When something looks wrong: terminal first, then the browser console/Inspect, then the file itself (`cat`, `dir`, `grep`).
 - On two machines: `git pull` before starting, commit and push when stopping. `.env.local` is recreated by hand.
 - Before saving a file with blanks, Ctrl+F for `___`.
-- AI tools edit files when allowed to. Ask for READ-ONLY advice, then check `git status` and `git diff` before committing.
 
 ## Checkpoint questions
 Quick self-test. Cover the answer, try to say it out loud, then check.
@@ -168,3 +167,37 @@ Quick self-test. Cover the answer, try to say it out loud, then check.
    - My answer: Vercel limits the body of a request to a serverless function to about 4.5 MB. My form allowed 10 MB, so big drawings would work on my laptop and fail in production. 4 MB keeps me under the real limit.
 25. Why work on a git branch for the desktop stage?
    - My answer: The live site deploys from `main`. On a branch I can break things freely, Vercel builds a separate preview address for it, and I merge only when it's good. If it goes badly, `main` is untouched.
+26. What does a URL like `/films?open=trash,art&tag=birb` describe?
+   - My answer: The whole desktop. The path is the window in front (Video Store). `?open=` lists the windows behind it, bottom to top (Trash, then Drawings). `?tag=birb` is the Drawings filter, kept only while Drawings is on screen. Nothing lives in React state, so Back, refresh and a shared link all show the same desktop.
+27. Why did the page contents move into components like `ArtContent` and `FilmsContent`?
+   - My answer: A window's content now has to show up on other routes too. Drawings must render on `/films` when it sits behind Video Store. Inside `app/art/page.tsx` it could only appear on `/art`. As a component, `WindowStack` can render it anywhere, and the page itself shrinks to one line.
+28. What do `readDesk()` and `go()` in `lib/windows.ts` do?
+   - My answer: `readDesk()` turns the current path and query into an object: which window is in front, which are behind, the tag and sort. `go()` takes that object and a destination and builds the next URL, moving the current window behind. Pages and links never build `?open=` by hand, so the rules live in one file.
+29. Why does `readDesk()` throw away ids it doesn't know, like `?open=pizza`?
+   - My answer: Same lesson as `?sort=banana`. Anyone can type anything in the address bar. `WINDOWS["pizza"]` is `undefined`, so drawing it would crash the page. I keep only ids from the allowed list and drop duplicates, plus a cap of 6 so nobody can open a hundred windows.
+30. Why does `WindowStack` draw the windows behind first and the focused one last?
+   - My answer: Later in the HTML paints on top when elements overlap. Drawing the `?open` list in order and the focused window last stacks them correctly. The CSS also gives `.mw[data-behind]` a lower `z-index` (9 instead of 10) to make it explicit.
+31. What happens when I close the window in front, and when I close one behind?
+   - My answer: Closing the front window brings forward the top one from `?open` (the last in the list). If nothing is behind, I go to `/desktop`. Closing a window behind just removes it from `?open` and keeps the same page. A detail window like `/art/12` closes back to its parent `/art`.
+32. Why can't `DesktopIcons` get the query string the way pages do?
+   - My answer: The icons live in `layout.tsx`, and layouts never receive `searchParams`. Only pages do. So `DeskLink` is a client component that reads the URL in the browser with `usePathname()` and `useSearchParams()`, then calls the same `readDesk()` and `go()` the server uses.
+33. Why is `DeskLink` wrapped in `<Suspense>`?
+   - My answer: Next.js requires `useSearchParams()` to sit inside a Suspense boundary, because a page built ahead of time doesn't know the query string yet. Without it the build fails. The `fallback` is a plain link with no `?open=`, shown until the browser knows the URL.
+34. How can `lib/windows.ts` run on the server and in the browser?
+   - My answer: It only has plain functions and data, with no hooks, no `"use client"`, no database and no `window`. Server pages import it to build links, and `DeskLink` imports it in the browser. Both compute the same URLs from the same rules.
+35. Why did the windows pop again and lose their drag position on every navigation?
+   - My answer: `/art` and `/films` are different pages, so Next.js throws away the old page's components and builds new ones, every `Window` included. Even `/art/12` to `/art/13` is a new page instance. A new component means `useState` starts from zero (drag offset lost), and the element is new, so the CSS `pop` animation runs again. Same idea as "a conditional unmounts its content".
+36. How do drag positions survive the remount?
+   - My answer: When a drag ends, `Window` saves `{ dx, dy }` to `sessionStorage` under its id (`mw-pos:art`). When a window appears, it reads that back. Same pattern as Settings with `localStorage`. `sessionStorage` forgets when the tab closes, so positions reset on a new visit.
+37. Why is `lastSeen` declared outside the `Window` component?
+   - My answer: State and refs inside a component die with it on remount. A variable at the top of the file belongs to the module and lives as long as the tab does. The cleanup writes "art-view left at this time". A new window with the same id that appears less than 1.5 s later knows it isn't really opening, sets `data-still`, and skips the pop.
+38. Why `useLayoutEffect` and not `useEffect` for the no-pop check?
+   - My answer: `useEffect` runs after the browser paints, so one frame of the pop would flash before I cancelled it. `useLayoutEffect` runs after React updates the page but before the paint, so the animation is turned off before anything shows. Same reason my `<head>` script applies effects before the first paint.
+39. What is the `decided` ref in `Window` protecting against?
+   - My answer: React Strict Mode, in dev only. It mounts a component, runs the cleanup, and mounts it again to catch bugs. My cleanup would write "left just now", and the second run would think the window was just on screen, so nothing would ever pop. A ref survives that double run, so the first decision sticks. A real remount gets a fresh ref.
+40. Why does clicking a window behind bring it forward, but clicking a link inside it doesn't call the same code?
+   - My answer: The window's `onClick` checks `closest("a, button, input, label, select, textarea")` and returns early for those. A link already builds its own URL with `go()`, which also brings that window forward. Without the check, the click would fire two navigations at once and they'd race.
+41. Why does every window page now render on each request?
+   - My answer: Reading `searchParams` makes a page dynamic, and every page needs `?open=` to know what to draw behind. Even Trash and Settings can't be built ahead of time anymore. The cost is that windows behind fetch their data again on every navigation. Letterboxd is still cached for an hour by `revalidate`, Supabase is not.
+42. What's the weak spot of this design?
+   - My answer: The windows aren't really kept alive. Every focus change rebuilds them, and I hide the signs: saved drag positions, no pop for recent windows. Scroll position inside a window still resets. Truly persistent windows would need parallel routes or a client-side window manager in the layout. That would be the hard refactor.

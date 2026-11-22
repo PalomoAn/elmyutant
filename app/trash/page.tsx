@@ -1,15 +1,10 @@
-import Window from "@/components/Window";
-import { TrashIcon } from "@/components/icons";
+import WindowStack from "@/components/WindowStack";
+import { readDesk, type SearchParams } from "@/lib/windows";
 
-export default function TrashPage() {
-  return (
-    <Window title="Trash" width={340} x={130} y={90}>
-      <div className="trash">
-        <div className="trash-icon">
-          <TrashIcon />
-        </div>
-        <p>The trash is empty.</p>
-      </div>
-    </Window>
-  );
+export default async function TrashPage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  return <WindowStack desk={readDesk("/trash", await searchParams)} />;
 }
