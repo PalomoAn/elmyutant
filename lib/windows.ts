@@ -19,6 +19,14 @@ export const WINDOWS: Record<WinId, WinDef> = {
 
 export const MAX_OPEN = 6;
 
+// Tab title plus a canonical URL without ?open=, so search engines treat
+// /films, /films?open=art, /films?open=art,trash... as one page.
+export function windowMetadata(id: WinId) {
+  const { route, title } = WINDOWS[id];
+  // "/" and "/welcome" are the same window; "/" is the one to index
+  return { title, alternates: { canonical: id === "welcome" ? "/" : route } };
+}
+
 const IDS = Object.keys(WINDOWS) as WinId[];
 
 function isWinId(s: string): s is WinId {

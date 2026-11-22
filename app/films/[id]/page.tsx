@@ -1,9 +1,30 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Window from "@/components/Window";
 import WindowStack from "@/components/WindowStack";
 import { getFilms, stars } from "@/lib/letterboxd";
+import { SITE } from "@/lib/config";
 import { closeFocusedHref, readDesk, type SearchParams } from "@/lib/windows";
+
+// getFilms uses fetch, which Next.js already shares between metadata and page
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+    const { id } = await params;
+    const film = (await getFilms()).find((f) => f.id === id);
+    if (!film) return {};
+    const review = film.review[0]?.replace(/\s+/g, " ").trim();
+    return {
+        title: `${film.title} (${film.year})`,
+        description: review
+            ? (review.length > 155 ? review.slice(0, 154).trimEnd() + "…" : review)
+            : `${SITE.name} thoughts on ${film.title} (${film.year}): ${stars(film.rating)}.`,
+        alternates: { canonical: `/films/${id}` },
+    };
+}
 
 export default async function FilmPage({
     params,

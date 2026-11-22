@@ -1,5 +1,7 @@
 import WindowStack from "@/components/WindowStack";
-import { readDesk, type SearchParams } from "@/lib/windows";
+import { readDesk, windowMetadata, type SearchParams } from "@/lib/windows";
+
+export const metadata = windowMetadata("settings");
 
 export default async function SettingsPage({
   searchParams,

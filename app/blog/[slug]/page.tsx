@@ -1,3 +1,5 @@
+import {cache} from "react";
+import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import Link from "next/link";
 import Window from "@/components/Window";
@@ -8,6 +10,35 @@ import {closeFocusedHref, go, readDesk, type SearchParams} from "@/lib/windows";
 
 export const dynamic = "force-dynamic";
 
+// metadata and page ask for the same post: one database call
+const getOne = cache(getPost);
+
+// first ~155 characters of the post, with the markdown symbols taken out
+function excerpt(markdown: string) {
+    const text = markdown
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, "")      // images
+        .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")   // links: keep the text
+        .replace(/[#>*_`~]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    return text.length > 155 ? text.slice(0, 154).trimEnd() + "…" : text;
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{slug: string}>;
+}): Promise<Metadata> {
+    const {slug} = await params;
+    const post = await getOne(slug);
+    if (!post) return {};
+    return {
+        title: post.title,
+        description: excerpt(post.body) || undefined,
+        alternates: {canonical: `/blog/${slug}`},
+    };
+}
+
 export default async function PostPage({
     params,
     searchParams,
@@ -17,7 +48,7 @@ export default async function PostPage({
 }) {
     const {slug} = await params;
     const desk = readDesk(`/blog/${slug}`, await searchParams);
-    const post = await getPost(slug);
+    const post = await getOne(slug);
     if(!post) notFound();
 
     return(

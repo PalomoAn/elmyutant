@@ -25,6 +25,8 @@ const nextConfig = {
         { key: "X-Content-Type-Options", value: "nosniff" },
         { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+        // ask AI dataset tools not to collect pages or images (honored by some, e.g. img2dataset)
+        { key: "X-Robots-Tag", value: "noai, noimageai" },
       ],
     }];
   },

@@ -3,6 +3,7 @@ import { readDesk, type SearchParams } from "@/lib/windows";
 
 export const metadata = {
   title: { absolute: "elMyutant · Jose, freelance developer" },
+  alternates: { canonical: "/" },
 };
 
 export default async function Home({

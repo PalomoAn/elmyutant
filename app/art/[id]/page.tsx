@@ -1,12 +1,33 @@
+import { cache } from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Window from "@/components/Window";
 import WindowStack from "@/components/WindowStack";
 import { getIllustration, getNeighbors, imageUrl } from "@/lib/illustrations";
+import { SITE } from "@/lib/config";
 import { closeFocusedHref, go, readDesk, type SearchParams } from "@/lib/windows";
 
 export const dynamic = "force-dynamic";
+
+// metadata and page ask for the same drawing: one database call
+const getItem = cache(getIllustration);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const item = await getItem(id);
+  if (!item) return {};
+  return {
+    title: item.title,
+    description: item.description || `A drawing by ${SITE.name}: ${item.title}.`,
+    alternates: { canonical: `/art/${id}` },
+  };
+}
 
 export default async function ArtViewer({
   params,
@@ -17,7 +38,7 @@ export default async function ArtViewer({
 }) {
   const { id } = await params;
   const desk = readDesk(`/art/${id}`, await searchParams);
-  const item = await getIllustration(id);
+  const item = await getItem(id);
 
   if (!item) notFound();
 
